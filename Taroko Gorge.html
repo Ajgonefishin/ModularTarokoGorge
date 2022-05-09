@@ -27,154 +27,246 @@ IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 <style type="text/css">
 /* <![CDATA[ */
 body {
- background: #062;
- color: #dad;
- margin: 0 24pt 0 24pt;
- font-family: Optima, sans-serif;
- font-size: 13pt;
-}
+   background: #062;
+   color: #dad;
+   margin: 0 24pt 0 24pt;
+   font-family: Optima, sans-serif;
+   font-size: 13pt;
+  }
 div {
- height: 16pt;
+   height: 16pt;
 }
 a {
- color: #117;
- text-decoration: none;
+   color: #117;
+   text-decoration: none;
 }
 
 .textBox {
-  width: 100px;
-  height: 40px;
+
+}
+
+#entryBlock {
+  float: left;
+  background: rgba(11,23,232,0.3);
+  height: auto;
+  padding: 15px;
+  border-radius: 10px;
+  width: 1020px;
+}
+
+h4, p, label {
+  color: #8ed4f3;
 }
 
 /* ]]> */
 </style>
 <script type="text/javascript">
-var t = 0;
-var n = 0;
-var paths = 0;
-var above = 'brow,mist,shape,layer,the crag,stone,forest,height'.split(',');
-var below = 'flow,basin,shape,vein,rippling,stone,cove,rock'.split(',');
-var trans = 'command,pace,roam,trail,frame,sweep,exercise,range'.split(',');
-var imper = 'track,shade,translate,stamp,progress through,direct,run,enter';
-imper = imper.split(',');
-var intrans = 'linger,dwell,rest,relax,hold,dream,hum'.split(',');
-var s = 's,'.split(',');
-var texture = 'rough,fine'.split(',');
+  var t = 0;
+  var n = 0;
+  var paths = 0;
+  var above = 'brow,mist,shape,layer,the crag,stone,forest,height'.split(',');
+  var below = 'flow,basin,shape,vein,rippling,stone,cove,rock'.split(',');
+  var trans = 'command,pace,roam,trail,frame,sweep,exercise,range'.split(',');
+  var imper = 'track,shade,translate,stamp,progress through,direct,run,enter';
+  imper = imper.split(',');
+  var intrans = 'linger,dwell,rest,relax,hold,dream,hum'.split(',');
+  var s = 's,'.split(',');
+  var texture = 'rough,fine'.split(',');
+  var adjectives = 'encompassing, rough, sinuous, straight, objective, arched, cool, clear, dim, driven'.split(', ');
 
-function rand_range(max) {
-  return Math.floor(Math.random() * (max + 1));
-}
+  function rand_range(max) {
+    return Math.floor(Math.random() * (max + 1));
+  }
 
-function choose(array) {
- return array[rand_range(array.length - 1)];
-}
+  function choose(array) {
+   return array[rand_range(array.length - 1)];
+  }
 
-function path() {
-   var p = rand_range(1);
-   var words = choose(above);
-   if ((words === 'forest') && (rand_range(3) === 1)) {
-      words = 'monkeys '+ choose(trans);
-   } else {
-      words += s[p] + ' ' + choose(trans) + s[(p + 1) % 2];
-   }
-   words += ' the ' + choose(below) + choose(s) + '.';
-   return words;
-}
+  function path() {
+     var p = rand_range(1);
+     var words = choose(above);
+     if ((words === 'forest') && (rand_range(3) === 1)) {
+        words = 'monkeys '+ choose(trans);
+     } else {
+        words += s[p] + ' ' + choose(trans) + s[(p + 1) % 2];
+     }
+     words += ' the ' + choose(below) + choose(s) + '.';
+     return words;
+  }
 
-function site() {
-   var words = '';
-   if (rand_range(2) === 1) {
-      words += choose(above);
-   } else {
-      words += choose(below);
-   }
-   words += 's ' + choose(intrans) + '.';
-   return words;
-}
+  function site() {
+     var words = '';
+     if (rand_range(2) === 1) {
+        words += choose(above);
+     } else {
+        words += choose(below);
+     }
+     words += 's ' + choose(intrans) + '.';
+     return words;
+  }
 
-function cave() {
-   var adjs = ('encompassing,' + choose(texture) + ',sinuous,straight,objective,arched,cool,clear,dim,driven').split(',');
-   var target = 1 + rand_range(3);
-   while (adjs.length > target) {
-      adjs.splice(rand_range(adjs.length), 1);
-      }
-   var words = '\u00a0\u00a0' + choose(imper) + ' the ' + adjs.join(' ') + ' \u2014';
-   return words;
-}
+  function cave() {
+     //var adjs = ('encompassing,' + choose(texture) + ',sinuous,straight,objective,arched,cool,clear,dim,driven').split(',');
+     var adjs = adjectives.toString().split(',');
+     var target = 1 + rand_range(3);
+     while (adjs.length > target) {
+        adjs.splice(rand_range(adjs.length), 1);
+        console.log(adjs);
+        }
+     var words = '\u00a0\u00a0' + choose(imper) + ' the ' + adjs.join(' ') + ' \u2014';
+     return words;
+  }
 
-function do_line() {
-   var main = document.getElementById('main');
+  function do_line() {
+     var main = document.getElementById('main');
 
-   if (t <= 25) {
-      t += 1;
-   } else {
-      main.removeChild(document.getElementById('main').firstChild);
-   }
+     if (t <= 25) {
+        t += 1;
+     } else {
+        main.removeChild(document.getElementById('main').firstChild);
+     }
 
-   if (n === 0) {
-      text = ' ';
-   } else if (n === 1) {
-    paths = 2 + rand_range(2);
-      text = path();
-   } else if (n < paths) {
-      text = site();
-   } else if (n === paths) {
-      text = path();
-   } else if (n === paths + 1) {
-      text = ' ';
-   } else if (n === paths + 2) {
-      text = cave();
-   } else {
-      text = ' ';
-      n = 0;
-   }
-   //increment n
-   n += 1;
+     if (n === 0) {
+        text = ' ';
+     } else if (n === 1) {
+      paths = 2 + rand_range(2);
+        text = path();
+     } else if (n < paths) {
+        text = site();
+     } else if (n === paths) {
+        text = path();
+     } else if (n === paths + 1) {
+        text = ' ';
+     } else if (n === paths + 2) {
+        text = cave();
+     } else {
+        text = ' ';
+        n = 0;
+     }
+     //increment n
+     n += 1;
 
-   text = text.substring(0,1).toUpperCase() + text.substring(1,text.length);
-   last = document.createElement('div');
+     text = text.substring(0,1).toUpperCase() + text.substring(1,text.length);
+     last = document.createElement('div');
 
-   last.appendChild(document.createTextNode(text));
-   main.appendChild(last);
+     last.appendChild(document.createTextNode(text));
+     main.appendChild(last);
 
-}
+  }
 
 
-function poem() {
-  document.getElementById("entryBlock").style.display = "none";
-  setInterval(do_line, 1200);
-}
+  function poem() {
+    document.getElementById("entryBlock").style.display = "none";
+    setInterval(do_line, 1200);
+  }
 
-function continueEntry() {
+  function save(area) {
+    if (area === "aboveEntry") {
+      above = document.getElementById(area).value.split(', ');
+    } else if (area === "belowEntry") {
+      below = document.getElementById(area).value.split(', ');
+    } else if (area === "transEntry") {
+      trans = document.getElementById(area).value.split(', ');
+    } else if (area === "imperEntry") {
+      imper = document.getElementById(area).value.split(', ');
+    } else if (area === "intransEntry") {
+      intrans = document.getElementById(area).value.split(', ');
+    } else if (area === "adjectiveEntry") {
+      adjectives = document.getElementById(area).value.split(', ');
+    }
 
-}
+
+    console.log("saved " + area);
+  }
 </script>
   <title>Taroko Gorge</title>
 </head>
-<div id="entryBlock" style="float: left; background: rgba(11,23,232,0.3); height: auto; padding: 15px; border-radius: 10px;">
+<div id="entryBlock">
   <h1>Create your own Digital Poetry - Taroko Gorge</h1>
-  <h3>Enter in lists of words, and this will create a procedurally generated, infinite poetry piece with them.
-      <br /> Click some links on the right to see what this looks like.
-  </h3>
-  <h4>
-    A given line can contain an 'above' noun, a 'below' noun, a transitive verb, an intransitive verb or an imperative verb.
-    <br /> Each text field has the default values in them, so feel free to edit as much or as little as you want.
-    <br />Separate each entry with a comma followed by a space!
-  </h4>
-  <br />
+  <h4>Enter in lists of words, and this will create a procedurally generated, infinite poetry piece with them.
+  <br /> Modification by Ajani Mohanty</h4>
+
+  <h3>Background</h3>
+  <p>
+    This project is a fork of the original Taroko Gorge website, which itself was a recreation of a Python program from 2009.
+    The original program created infinite poetry based on lists of words that are reminiscent of Taroko Gorge National Park in Japan.
+    With the introduction of the website, some people have made their own spins on the project by duplicating the source code and putting their own word lists in.
+    This website aims to make this process a lot more streamlined for normal users, by providing fields to put their lists of words into and provide their own spin
+    on this unique digital poetry project. If you'd like to see the original project or other peoples' versions, feel free to click the links on the right.
+
+  </p>
+
+  <h3>How-To</h3>
+  <p>
+    This website works off of lists of words that the program will use to create the poetry. There are 6 lists, using the following
+    kinds of words: 'above' nouns, 'below' nouns, transitive verbs, intransitive verbs, imperative verbs, and adjectives.
+    <br /> Each text field has the default values in them, so feel free to edit as much or as little as you want. You can completely delete the default values if you'd like!
+    <br /> If it's confusing as to what kind of word you should put into a text field, look at the default values to see some examples of what works.
+    <br /> The program will automatically make nouns plural, so keep them singular when adding new ones.
+    <br /> Separate each entry with a comma followed by a space!
+  </p>
+
+  <h3>Enter your words!</h3>
 
   <label for="aboveEntry">
-    Enter your 'above' words. These are nouns will appear at the beginning of lines, typically using a verb to act on a 'below' noun.
+    Enter your 'above' nouns. These are nouns will appear at the beginning of lines, typically using a verb to act on a 'below' noun.
   </label>
   <br />
-  <textarea id="aboveEntry" class="textBox" name="aboveEntry" rows="10" cols="50">brow, mist, shape, layer, the crag, stone, forest, height</textarea>
+  <textarea onchange="save('aboveEntry')" rows="4" cols="50" id="aboveEntry" class="textBox" name="aboveEntry">brow, mist, shape, layer, the crag, stone, forest, height</textarea>
   <br />
+  <br />
+
+  <label for="belowEntry">
+    Enter your 'below' nouns. These are nouns will appear at the end of lines, either having an action done to them, or occasionally doing an action.
+  </label>
+  <br />
+  <textarea onchange="save('belowEntry')" rows="4" cols="50" id="belowEntry" class="textBox" name="belowEntry">flow, basin, shape, vein, rippling, stone, cove, rock</textarea>
+  <br />
+  <br />
+
+  <label for="transEntry">
+    Enter your transitive verbs. These are verbs that require objects to receive their action, and will be used between 'above' and 'below' nouns.
+  </label>
+  <br />
+  <textarea onchange="save('transEntry')" rows="4" cols="50" id="transEntry" class="textBox" name="transEntry">command, pace, roam, trail, frame, sweep, exercise, range</textarea>
+  <br />
+  <br />
+
+  <label for="imperEntry">
+    Enter your imperative verbs. These are commanding verbs that usually come up at the beginning of sentences, typically transition lines that separate stanzas.
+  </label>
+  <br />
+  <textarea onchange="save('imperEntry')" rows="4" cols="50" id="imperEntry" class="textBox" name="imperEntry">track, shade, translate, stamp, progress through, direct, run, enter</textarea>
+  <br />
+  <br />
+
+  <label for="intransEntry">
+    Enter your intransitive verbs. These are verbs that don't require a direct object to act on, and will form a line of the poem following a 'below' noun.
+  </label>
+  <br />
+  <textarea onchange="save('intransEntry')" rows="4" cols="50" id="intransEntry" class="textBox" name="intransEntry">linger, dwell, rest, relax, hold, dream, hum</textarea>
+  <br />
+  <br />
+
+  <label for="adjectiveEntry">
+    Enter your adjectives. These will show up in transition lines that separate stanzas.
+  </label>
+  <br />
+  <textarea onchange="save('adjectiveEntry')" rows="4" cols="50" id="adjectiveEntry" class="textBox" name="adjectiveEntry">encompassing, rough, sinuous, straight, objective, arched, cool, clear, dim, driven</textarea>
+  <br />
+  <br />
+
+
+
+
+
+
 
   <Button onclick="poem()">Begin generating poetry...</Button>
 </div>
 <!--<body onload="poem()">-->
 <div style="float:right; margin-top:12px; color:#0b3; height:60pt">
-<div>Taroko Gorge · 2009-01-08</div>
+<div><a style="color:#0b3" href="https://nickm.com/taroko_gorge/">Taroko Gorge · 2009-01-08 </a></div>
 <del><a href="https://nickm.com/taroko_gorge/original.html">Nick Montfort</a></del><br>
 <del><a href="https://nickm.com/taroko_gorge/tokyo_garage/">Scott Rettberg</a></del> <a href="http://retts.net/tokyogarage.html">[SR]</a><br>
 <del><a href="https://nickm.com/taroko_gorge/gorge/">J.R. Carpenter</a></del> <a href="http://luckysoap.com/generations/gorge.html">[JRC]</a><br>
