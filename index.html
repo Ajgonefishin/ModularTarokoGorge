@@ -162,6 +162,20 @@ h4, p, label {
     setInterval(do_line, 1200);
   }
 
+  function myPoem() {
+    above = "pilot, engine, driver, mecha, giant, citizen, dragon".split(', ');
+    below = "road, building, train, sign, sword, shrine, laser".split(', ');
+    trans = "sharpen, drive, create, fight, destroy, power, find".split(', ');
+    imper = 'overpower, progress through, run, enter, escape, power'.split(', ');
+    intrans = "ride, drive, search, seek, grow, rest, offer wisdom".split(', ');
+    adjectives = "vibrant, neon, colorful, sharp, deep, powerful, enhanced".split(', ');
+
+    document.body.style.background = "linear-gradient(to bottom right, #6000ff, #ff0068)";
+    document.body.style.color = "white";
+    document.body.style.fontFamily = "'Kanit', sans-serif";
+    poem();
+  }
+
   function save(area) {
     if (area === "aboveEntry") {
       above = document.getElementById(area).value.split(', ');
