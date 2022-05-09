@@ -26,10 +26,13 @@ IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 -->
 <style type="text/css">
 /* <![CDATA[ */
-body {
-   background: #062;
-   color: #dad;
-   margin: 0 24pt 0 24pt;
+
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@600&display=swap');
+
+  body {
+  color: #dad;
+  background: linear-gradient(to bottom right, #7dc72a, #0a8b5e);
+  margin: 0 24pt 0 24pt;
    font-family: Optima, sans-serif;
    font-size: 13pt;
   }
@@ -154,7 +157,6 @@ h4, p, label {
 
   }
 
-
   function poem() {
     document.getElementById("entryBlock").style.display = "none";
     setInterval(do_line, 1200);
@@ -184,7 +186,7 @@ h4, p, label {
 <div id="entryBlock">
   <h1>Create your own Digital Poetry - Taroko Gorge</h1>
   <h4>Enter in lists of words, and this will create a procedurally generated, infinite poetry piece with them.
-  <br /> Modification by Ajani Mohanty</h4>
+    <br /> Modification by Ajani Mohanty. <a onclick="myPoem()" style="color: white; cursor: pointer" >Click here to see my version of Taroko Gorge, inspired by neo-futuristic Japan.</a></h4>
 
   <h3>Background</h3>
   <p>
@@ -256,12 +258,6 @@ h4, p, label {
   <br />
   <br />
 
-
-
-
-
-
-
   <Button onclick="poem()">Begin generating poetry...</Button>
 </div>
 <!--<body onload="poem()">-->
@@ -310,7 +306,7 @@ h4, p, label {
 <del><a href="https://nickm.com/taroko_gorge/melroko_porridge/">Melinda M. White</a></del> <a href="http://multimodalmel.com/pages/melroko.html">[MMW]</a><br>
 <a href="http://nickm.com/">Nick Montfort · 2021-09-23</a>
 </div>
-<div id="main"></div>
+<div id="main" style="height: 100vh; color: white"></div>
 
 
 </body></html>
