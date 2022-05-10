@@ -61,6 +61,10 @@ h4, p, label {
   color: #8ed4f3;
 }
 
+b {
+  color: #b3e8b6;
+}
+
 /* ]]> */
 </style>
 <script type="text/javascript">
@@ -225,7 +229,7 @@ h4, p, label {
   <h3>Enter your words!</h3>
 
   <label for="aboveEntry">
-    Enter your 'above' nouns. These are nouns will appear at the beginning of lines, typically using a verb to act on a 'below' noun.
+    Enter your 'above' nouns. These are nouns will appear at the beginning of lines, typically using a verb to act on a 'below' noun. Example: "<b>Forest</b> paces the basin."
   </label>
   <br />
   <textarea onchange="save('aboveEntry')" rows="4" cols="50" id="aboveEntry" class="textBox" name="aboveEntry">brow, mist, shape, layer, the crag, stone, forest, height</textarea>
@@ -233,7 +237,7 @@ h4, p, label {
   <br />
 
   <label for="belowEntry">
-    Enter your 'below' nouns. These are nouns will appear at the end of lines, either having an action done to them, or occasionally doing an action.
+    Enter your 'below' nouns. These are nouns will appear at the end of lines, either having an action done to them, or occasionally doing an action. Example: "The crags sweep the <b>cove</b>."
   </label>
   <br />
   <textarea onchange="save('belowEntry')" rows="4" cols="50" id="belowEntry" class="textBox" name="belowEntry">flow, basin, shape, vein, rippling, stone, cove, rock</textarea>
@@ -241,7 +245,7 @@ h4, p, label {
   <br />
 
   <label for="transEntry">
-    Enter your transitive verbs. These are verbs that require objects to receive their action, and will be used between 'above' and 'below' nouns.
+    Enter your transitive verbs. These are verbs that require objects to receive their action, and will be used between 'above' and 'below' nouns. Example: "Brow <b>commands</b> the rock."
   </label>
   <br />
   <textarea onchange="save('transEntry')" rows="4" cols="50" id="transEntry" class="textBox" name="transEntry">command, pace, roam, trail, frame, sweep, exercise, range</textarea>
@@ -249,7 +253,7 @@ h4, p, label {
   <br />
 
   <label for="imperEntry">
-    Enter your imperative verbs. These are commanding verbs that usually come up at the beginning of sentences, typically transition lines that separate stanzas.
+    Enter your imperative verbs. These are commanding verbs that usually come up at the beginning of sentences, typically transition lines that separate stanzas. Example: "<b>track</b> the sinuous dim —"
   </label>
   <br />
   <textarea onchange="save('imperEntry')" rows="4" cols="50" id="imperEntry" class="textBox" name="imperEntry">track, shade, translate, stamp, progress through, direct, run, enter</textarea>
@@ -257,7 +261,7 @@ h4, p, label {
   <br />
 
   <label for="intransEntry">
-    Enter your intransitive verbs. These are verbs that don't require a direct object to act on, and will form a line of the poem following a 'below' noun.
+    Enter your intransitive verbs. These are verbs that don't require a direct object to act on, and will form a line of the poem following a 'below' noun. Example: "Forests <b>linger</b>."
   </label>
   <br />
   <textarea onchange="save('intransEntry')" rows="4" cols="50" id="intransEntry" class="textBox" name="intransEntry">linger, dwell, rest, relax, hold, dream, hum</textarea>
@@ -265,7 +269,7 @@ h4, p, label {
   <br />
 
   <label for="adjectiveEntry">
-    Enter your adjectives. These will show up in transition lines that separate stanzas.
+    Enter your adjectives. These will show up in transition lines that separate stanzas. Example: "direct the <b>encompassing straight</b> —"
   </label>
   <br />
   <textarea onchange="save('adjectiveEntry')" rows="4" cols="50" id="adjectiveEntry" class="textBox" name="adjectiveEntry">encompassing, rough, sinuous, straight, objective, arched, cool, clear, dim, driven</textarea>
